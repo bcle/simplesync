@@ -47,5 +47,5 @@ for dirpath, dirnames, filenames in entries:
         srcpath = src + filerelpath
         dstpath = dst + filerelpath
         if not os.path.exists(dstpath):
-            print 'cp -p %s %s' % (srcpath, dstpath)
+            print 'cp -p "%s" "%s"' % (srcpath, dstpath)
     #print '------'
