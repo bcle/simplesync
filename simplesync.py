@@ -29,7 +29,9 @@ if dst.endswith(os.sep):
     dst = dst[:-1]
 
 entries = walk(src)
+dirs_created = set()
 
+print 'set -x'
 for dirpath, dirnames, filenames in entries:
     dirpath = dirpath[len(src):]
     if len(dirpath) == 0:
@@ -46,6 +48,10 @@ for dirpath, dirnames, filenames in entries:
         # print filerelpath
         srcpath = src + filerelpath
         dstpath = dst + filerelpath
+        dstdirpath = dst + dirpath
+        if not os.path.exists(dstdirpath) and (dstdirpath not in dirs_created):
+            print 'mkdir -p "%s"' % dstdirpath
+            dirs_created.add(dstdirpath)
         if not os.path.exists(dstpath):
             print 'cp -p "%s" "%s"' % (srcpath, dstpath)
     #print '------'
