@@ -9,9 +9,9 @@ usage = "usage: %prog [options] src dst"
 parser = OptionParser(usage=usage)
 parser.add_option("-f", "--file", dest="filename",
                   help="write report to FILE", metavar="FILE")
-parser.add_option("-q", "--quiet",
-                  action="store_false", dest="verbose", default=True,
-                  help="don't print status messages to stdout")
+parser.add_option("-r", "--reverse",
+                  action="store_true", dest="reverse", default=False,
+                  help="reverse direction")
 
 (options, args) = parser.parse_args()
 
@@ -27,6 +27,9 @@ if src.endswith(os.sep):
 
 if dst.endswith(os.sep):
     dst = dst[:-1]
+
+if options.reverse:
+    src, dst = dst, src
 
 entries = walk(src)
 dirs_created = set()
