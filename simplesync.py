@@ -34,7 +34,7 @@ if options.reverse:
 entries = walk(src)
 dirs_created = set()
 files_to_ignore = set(['.DS_Store'])
-print 'set -x'
+print 'set -ex'
 for dirpath, dirnames, filenames in entries:
     dirpath = dirpath[len(src):]
     if len(dirpath) == 0:
