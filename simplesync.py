@@ -30,7 +30,7 @@ if dst.endswith(os.sep):
 
 entries = walk(src)
 dirs_created = set()
-
+files_to_ignore = set(['.DS_Store'])
 print 'set -x'
 for dirpath, dirnames, filenames in entries:
     dirpath = dirpath[len(src):]
@@ -44,6 +44,8 @@ for dirpath, dirnames, filenames in entries:
 
     #print 'filenames:'
     for filename in filenames:
+        if filename in files_to_ignore:
+            continue
         filerelpath = os.path.join(dirpath, filename)
         # print filerelpath
         srcpath = src + filerelpath
